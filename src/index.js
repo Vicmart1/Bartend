@@ -30,7 +30,16 @@ var createIngredient = function(type, amount, isAlcohol) {
           return reject(error);
         });
       } else {
-        return resolve(results[0].id);
+        var ingredient = results[0];
+        ingredient.set("isAlcohol", isAlcohol);
+        ingredient.set("amount", amount);
+
+        ingredient.save()
+        .then((ingredient) => {
+          return resolve(ingredient.id);
+        }, (error) => {
+          return reject(error);
+        });
       }
     }, (error) => {
       return reject(error);
@@ -73,7 +82,8 @@ var prepareCocktail = function(name, recipe, ingredients) {
     addIngredients(ingredients)
     .then(function(ingredientIds) {
       ingredientIds.forEach(id => {
-        queryItem(id, Ingredient).then(function(item) {
+        queryItem(id, Ingredient)
+        .then(function(item) {
           ingredientsObjects.push(item);
           if(ingredientsObjects.length === ingredientIds.length) {
             createCocktail(name, recipe, ingredients, ingredientsObjects)
@@ -88,6 +98,40 @@ var prepareCocktail = function(name, recipe, ingredients) {
         });
       });
     }, function(error) {
+      return reject(error);
+    });
+  });
+}
+
+var updateCocktail = function(recipe, ingredients, ingredientsObjects, cocktail) {
+  return new Promise((resolve, reject) => {
+    var relation = cocktail.relation("ingredients");
+    relation.query().find()
+    .then((ingredientsObjectReplace) => {
+      var relation = cocktail.relation("ingredients");
+      ingredientsObjectReplace.forEach(ingredientObjectReplace => {
+        relation.remove(ingredientObjectReplace)
+        cocktail.unset("ID_" + ingredientObjectReplace.id);
+      });
+
+      cocktail.set("recipe", recipe);
+
+      for (var i = 0 ; i < ingredientsObjects.length; i++) {
+        var found = ingredients.find(function(element) {
+          return element[0].toLowerCase() === ingredientsObjects[i].get('type');
+        });
+
+        relation.add(ingredientsObjects[i]);
+        cocktail.set("ID_" + ingredientsObjects[i].id, found[2]);
+      }
+
+      cocktail.save()
+      .then((cocktail) => {
+        return resolve(cocktail);
+      }, (error) => {
+        return reject(error);
+      });
+    }, (error) => {
       return reject(error);
     });
   });
@@ -121,9 +165,45 @@ var createCocktail = function(name, recipe, ingredients, ingredientsObjects) {
           return reject(error);
         });
       } else {
-        printCocktail(results[0])
-        .then((string) => {
-          return reject("This cocktail already exists.\n" + string);
+        updateCocktail(recipe, ingredients, ingredientsObjects, results[0])
+        .then((cocktail) => {
+          return resolve(cocktail);
+        }, (error) => {
+          return reject(error);
+        });
+      }
+    }, (error) => {
+      return reject(error);
+    });
+  });
+}
+
+var deleteCocktail = function(name) {
+  return new Promise((resolve, reject) => {
+    var query = new Parse.Query(Cocktail);
+    query.equalTo("name", name.toLowerCase()).find()
+    .then((results) => {
+      if (results.length === 0) {
+        return reject("No cocktail named " + name + " to delete.");
+      } else {
+        var cocktail = results[0];
+        var relation = cocktail.relation("ingredients");
+        relation.query().find()
+        .then((ingredientsObjectReplace) => {
+          var relation = cocktail.relation("ingredients");
+          ingredientsObjectReplace.forEach(ingredientObjectReplace => {
+            relation.remove(ingredientObjectReplace)
+          });
+
+          cocktail.save().then(() => {
+            cocktail.destroy().then(() => {
+              return resolve("Cocktail successfully deleted.");
+            }, (error) => {
+              return reject(error);
+            });
+          }, (error) => {
+            return reject(error);
+          });
         }, (error) => {
           return reject(error);
         });
@@ -141,15 +221,16 @@ var printCocktail = function(cocktail) {
     var relation = cocktail.relation("ingredients");
     var floorAmount = -1;
 
-    relation.query().find().then((ingredients) => {
+    relation.query().find()
+    .then((ingredients) => {
       var count = 0;
       ingredients.forEach(ingredient => {
         count++;
-        var ingredientAmount = parseInt(cocktail.get("ID_" + ingredient.id));
+        var ingredientAmount = parseInt(cocktail.get("ID_" + ingredient.id), 10);
         var ingredientTotal = ingredient.get('amount');
         var canMake = Math.floor(ingredientTotal/ozToMl(ingredientAmount));
 
-        result += ingredientAmount + "oz of " + ingredient.get('type');
+        result += cocktail.get("ID_" + ingredient.id) + "oz of " + ingredient.get('type');
         floorAmount = floorAmount === -1 || canMake < floorAmount ? canMake : floorAmount;
 
         if (count === ingredients.length) {
@@ -166,7 +247,8 @@ var printCocktail = function(cocktail) {
 
 var recipe = "Add ingredients in a shaker filled with ice. Shake aggressively and pour over a glass of ice. Garnish with limes."
 
-prepareCocktail('mojito', recipe, [['vodka', 750, 1.5, true], ['gin', 250, 2, true], ['tequila', 500, 1, true]]).then(function(cocktail) {  
+prepareCocktail('mojito', recipe, [['raspberry', 300, 4, false], ['water', 400, 5, false]])
+.then(function(cocktail) {  
   printCocktail(cocktail)
   .then((string) => {
     console.log(string);
@@ -180,8 +262,15 @@ prepareCocktail('mojito', recipe, [['vodka', 750, 1.5, true], ['gin', 250, 2, tr
 });
 
 function makeAnother() {
-  prepareCocktail('cosmopolitan', recipe, [['vodka', 750, 2.5, true], ['cranberry juice', 600, 2.75, false], ['gin', 1000, 1.5, true]]).then(function(cocktail) {  
+  prepareCocktail('cosmopolitan', recipe, [['vodka', 750, 2.5, true], ['cranberry juice', 600, 2.75, false], ['gin', 1000, 1.5, true]])
+  .then(function(cocktail) {  
     printCocktail(cocktail)
+    .then((string) => {
+      console.log(string);
+    }, (error) => {
+      console.log(error);
+    });
+    deleteCocktail('mojito')
     .then((string) => {
       console.log(string);
     }, (error) => {
