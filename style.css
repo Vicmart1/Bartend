@@ -1,0 +1,251 @@
+html, body {
+  font-family: Avenir, Arial, Helvetica, sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+
+body.fixed {
+  overflow: hidden;
+}
+
+#rootCocktails {
+  max-width: 1000px;
+  margin: auto;
+  -o-perspective: 1000;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+  -o-perspective-origin: center;
+  -webkit-perspective-origin: center;
+  perspective-origin: center;
+}
+
+#modalCocktail {
+  position: fixed;
+  top: 100vh;
+  left: 0;
+  width: 100vw;
+  margin: auto;
+  height: 100vh;
+  z-index: 10;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: top 0.25s ease-out;
+  transition: top 0.25s ease-out;
+}
+
+#modalCocktail .cocktail {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  max-width: 600px;
+  width: 600px;
+  margin: auto;
+}
+
+#modalCocktail .cocktail .editIcon {
+  top: 70px;
+  right: 19px;
+}
+
+#modalCocktail .cocktail .exitIcon {
+  display: block;
+}
+
+#modalCocktail .cocktail .editIcon,
+#modalCocktail .cocktail .exitIcon {
+  width: 36px;
+  height: 36px;
+}
+
+#modalCocktail .cocktail .title {
+  line-height: 36px;
+  width: calc(100% - 60px);
+}
+
+@media (max-width: 899px) {
+  #modalCocktail .cocktail {
+    margin: 0px;
+    margin-top: 15vh;
+  }
+}
+
+@media (min-width: 900px) {
+  #modalCocktail .cocktail {
+    padding: 30px;
+    padding-bottom: 40px;
+  }
+  #modalCocktail .cocktail .exitIcon {
+    top: 30px;
+    right: 30px;
+  }
+  #modalCocktail .cocktail .editIcon {
+    top: 75px;
+    right: 29px;
+  }
+}
+
+#modalCocktail.active {
+  top: 0px;
+}
+
+#overlay {
+  -webkit-transition: opacity 0.25s ease-out;
+  transition: opacity 0.25s ease-out;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000000;
+  opacity: 0;
+  z-index: -1;
+}
+
+#overlay.active {
+  z-index: 9;
+}
+
+#overlay.show {
+  opacity: 0.75;
+}
+
+.cocktails {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 50% 50%;
+      grid-template-columns: 50% 50%;
+  margin: 10px -10px;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+}
+
+@media (max-width: 899px) {
+  .cocktails {
+    display: block;
+    margin: 10px 0px;
+  }
+}
+
+.cocktails.background {
+  -webkit-transform: translateZ(-25px);
+  transform: translateZ(-25px);
+}
+
+.cocktail {
+  -webkit-box-shadow: 0px 0px 5px #CCC, 0px 0px 1px #999;
+          box-shadow: 0px 0px 5px #CCC, 0px 0px 1px #999;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  position: relative;
+}
+
+@media (max-width: 899px) {
+  .cocktail {
+    margin: 15px;
+  }
+}
+
+.cocktail .title {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  line-height: 25px;
+  width: calc(100% - 40px);
+}
+
+.cocktail .ingredientTitle {
+  margin-bottom: 0px;
+}
+
+.cocktail .ingredients {
+  list-style: none;
+  padding-left: 20px;
+}
+
+.cocktail .ingredients .ingredient {
+  position: relative;
+  width: calc(100% - 50px);
+}
+
+.cocktail .ingredients .ingredient .number {
+  font-size: 1.25em;
+}
+
+.cocktail .ingredients .ingredient .altText {
+  margin-top: -4px;
+  padding-left: 20px;
+  opacity: 0.5;
+  font-style: italic;
+  font-size: 0.85em;
+}
+
+.cocktail .ingredients .ingredient .mainText span .mainInput {
+  width: 50px;
+  text-align: right;
+}
+
+.cocktail .ingredients .newIngredient svg {
+  top: 6px;
+  position: relative;
+  margin-right: 3px;
+}
+
+.cocktail input,
+.cocktail textarea {
+  background: none;
+  border: none;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  outline-width: 0;
+  font-size: 1.25em;
+  font-family: Avenir;
+  border-radius: 0px;
+  padding: 0px;
+}
+
+@media (max-width: 899px) {
+  .cocktail input {
+    max-width: 150px;
+    margin: 10px 0;
+  }
+}
+
+.cocktail textarea {
+  font-size: 1em;
+  width: 100%;
+  height: 100px;
+  resize: none;
+  border-left-width: 2px;
+  border-left-style: solid;
+  border-bottom-width: 0px;
+  padding: 0px 5px;
+}
+
+@media (max-width: 899px) {
+  .cocktail textarea {
+    height: 200px;
+    font-size: 1.25em;
+  }
+}
+
+.cocktail *:focus {
+  outline: none;
+}
+
+.cocktail .canMake {
+  margin-top: 1em;
+}
+
+.cocktail .editIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.cocktail .exitIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: none;
+}
+/*# sourceMappingURL=style.css.map */
