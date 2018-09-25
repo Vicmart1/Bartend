@@ -1,9 +1,12 @@
-//import React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import CocktailContainer from './cocktail.js';
+import IngredientContainer from './ingredient.js';
+import enableScroll from './cocktail.js';
 
 var Parse = require('parse');
-Parse.initialize("parse-server");
-Parse.serverURL = "http://bartend.herokuapp.com/parse";
+Parse.initialize("parse-server", "parse-server");
+Parse.serverURL = "https://bartend.herokuapp.com/parse";
 
 const Cocktail = Parse.Object.extend("CocktailTest");
 const Ingredient = Parse.Object.extend("IngredientTest");
@@ -11,7 +14,7 @@ const Ingredient = Parse.Object.extend("IngredientTest");
 const ozToMl = (oz) => (oz * 29.5735);
 const mlToOz = (ml) => (ml / 29.5735);
 
-var createIngredient = function(type, amount, isAlcohol) {
+var createIngredient = function(type, amount, isAlcohol, isLiquid) {
   return new Promise((resolve, reject) => {
     var query = new Parse.Query(Ingredient);
     query.equalTo("type", type.toLowerCase()).find()
@@ -22,6 +25,7 @@ var createIngredient = function(type, amount, isAlcohol) {
         ingredient.set("type", type.toLowerCase());
         ingredient.set("isAlcohol", isAlcohol);
         ingredient.set("amount", amount);
+        ingredient.set("isLiquid", isLiquid);
 
         ingredient.save()
         .then((ingredient) => {
@@ -33,6 +37,7 @@ var createIngredient = function(type, amount, isAlcohol) {
         var ingredient = results[0];
         ingredient.set("isAlcohol", isAlcohol);
         ingredient.set("amount", amount);
+        ingredient.set("isLiquid", isLiquid);
 
         ingredient.save()
         .then((ingredient) => {
@@ -51,7 +56,7 @@ var addIngredients = function(ingredients) {
   return new Promise((resolve, reject) => {
     var ingredientIds = [];
     ingredients.forEach(ingredient => {
-      createIngredient(ingredient[0], ingredient[1], ingredient[3])
+      createIngredient(ingredient[0], ingredient[1], ingredient[3], ingredient[4])
       .then(function(id) {
         ingredientIds.push(id);
         if(ingredientIds.length === ingredients.length) {
@@ -76,7 +81,7 @@ function queryItem(id, type) {
   });
 }
 
-var prepareCocktail = function(name, recipe, ingredients) {
+var prepareCocktail = function(name, recipe, ingredients, color) {
   return new Promise((resolve, reject) => {
     var ingredientsObjects = [];
     addIngredients(ingredients)
@@ -86,7 +91,7 @@ var prepareCocktail = function(name, recipe, ingredients) {
         .then(function(item) {
           ingredientsObjects.push(item);
           if(ingredientsObjects.length === ingredientIds.length) {
-            createCocktail(name, recipe, ingredients, ingredientsObjects)
+            createCocktail(name, recipe, ingredients, color, ingredientsObjects)
             .then(function(cocktail) {
               return resolve(cocktail);
             }, function(error) {
@@ -103,7 +108,7 @@ var prepareCocktail = function(name, recipe, ingredients) {
   });
 }
 
-var updateCocktail = function(recipe, ingredients, ingredientsObjects, cocktail) {
+var updateCocktail = function(recipe, ingredients, color, ingredientsObjects, cocktail) {
   return new Promise((resolve, reject) => {
     var relation = cocktail.relation("ingredients");
     relation.query().find()
@@ -115,8 +120,10 @@ var updateCocktail = function(recipe, ingredients, ingredientsObjects, cocktail)
       });
 
       cocktail.set("recipe", recipe);
+      cocktail.set("color", color);
 
       for (var i = 0 ; i < ingredientsObjects.length; i++) {
+        // eslint-disable-next-line
         var found = ingredients.find(function(element) {
           return element[0].toLowerCase() === ingredientsObjects[i].get('type');
         });
@@ -137,7 +144,7 @@ var updateCocktail = function(recipe, ingredients, ingredientsObjects, cocktail)
   });
 }
 
-var createCocktail = function(name, recipe, ingredients, ingredientsObjects) {
+var createCocktail = function(name, recipe, ingredients, color, ingredientsObjects) {
   return new Promise((resolve, reject) => {
     var query = new Parse.Query(Cocktail);
     query.equalTo("name", name.toLowerCase()).find()
@@ -147,9 +154,11 @@ var createCocktail = function(name, recipe, ingredients, ingredientsObjects) {
 
         cocktail.set("name", name.toLowerCase());
         cocktail.set("recipe", recipe);
+        cocktail.set("color", color);
 
         var relation = cocktail.relation("ingredients");
         for (var i = 0 ; i < ingredientsObjects.length; i++) {
+          // eslint-disable-next-line
           var found = ingredients.find(function(element) {
             return element[0].toLowerCase() === ingredientsObjects[i].get('type');
           });
@@ -165,7 +174,7 @@ var createCocktail = function(name, recipe, ingredients, ingredientsObjects) {
           return reject(error);
         });
       } else {
-        updateCocktail(recipe, ingredients, ingredientsObjects, results[0])
+        updateCocktail(recipe, ingredients, color, ingredientsObjects, results[0])
         .then((cocktail) => {
           return resolve(cocktail);
         }, (error) => {
@@ -247,7 +256,7 @@ var printCocktail = function(cocktail) {
 
 var recipe = "Add ingredients in a shaker filled with ice. Shake aggressively and pour over a glass of ice. Garnish with limes."
 
-prepareCocktail('mojito', recipe, [['raspberry', 300, 4, false], ['water', 400, 5, false]])
+prepareCocktail('Mai-Tai', recipe, [['raspberry', 300, 4, false, false], ['water', 400, 5, false, true]], 'yellow')
 .then(function(cocktail) {  
   printCocktail(cocktail)
   .then((string) => {
@@ -262,7 +271,7 @@ prepareCocktail('mojito', recipe, [['raspberry', 300, 4, false], ['water', 400, 
 });
 
 function makeAnother() {
-  prepareCocktail('cosmopolitan', recipe, [['vodka', 750, 2.5, true], ['cranberry juice', 600, 2.75, false], ['gin', 1000, 1.5, true]])
+  prepareCocktail('raspberry mojito', recipe, [['rum', 750, 2, true, true], ['cranberry juice', 600, 2.75, false, true], ['gin', 1000, 1.5, true, true]], 'red')
   .then(function(cocktail) {  
     printCocktail(cocktail)
     .then((string) => {
@@ -270,16 +279,30 @@ function makeAnother() {
     }, (error) => {
       console.log(error);
     });
-    deleteCocktail('mojito')
+
+    var queryCocktail = new Parse.Query(Cocktail);
+    queryCocktail.find()
+    .then((cocktails) => {
+      ReactDOM.render(<CocktailContainer cocktails={cocktails}/>, document.querySelector('#rootCocktails'));
+    }, (error) => {
+      console.log(error);
+    });
+
+    var queryIngredient = new Parse.Query(Ingredient);
+    queryIngredient.find()
+    .then((ingredients) => {
+      ReactDOM.render(<IngredientContainer ingredients={ingredients}/>, document.querySelector('#rootIngredients'));
+    }, (error) => {
+      console.log(error);
+    });
+
+    /**deleteCocktail('mojito')
     .then((string) => {
       console.log(string);
     }, (error) => {
       console.log(error);
-    });
+    });**/
   }, function(error) {
     console.log(error);
   });
 }
-
-
-ReactDOM.render("Hello world!", document.querySelector('#root'));

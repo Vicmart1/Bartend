@@ -1,0 +1,170 @@
+.green-bg {
+  color: white;
+  fill: white;
+  border-color: #56ab2f;
+  background: #56ab2f;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#56ab2f), to(#a8e063));
+  background: linear-gradient(to right, #56ab2f, #a8e063);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.green-bg input,
+.green-bg textarea {
+  color: white;
+  border-color: white;
+  background-color: #FFFFFF30;
+}
+
+.orange-bg {
+  color: white;
+  fill: white;
+  border-color: #fc4a1a;
+  background: #fc4a1a;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#fc4a1a), to(#f7b733));
+  background: linear-gradient(to right, #fc4a1a, #f7b733);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.orange-bg input,
+.orange-bg textarea {
+  color: white;
+  border-color: white;
+  background-color: #FFFFFF30;
+}
+
+.red-bg {
+  color: white;
+  fill: white;
+  border-color: #cb2d3e;
+  background: #cb2d3e;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#cb2d3e), to(#ef473a));
+  background: linear-gradient(to right, #cb2d3e, #ef473a);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.red-bg input,
+.red-bg textarea {
+  color: white;
+  border-color: white;
+  background-color: #FFFFFF30;
+}
+
+.yellow-bg {
+  color: black;
+  fill: black;
+  border-color: #CAC531;
+  background: #CAC531;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#CAC531), to(#F3F9A7));
+  background: linear-gradient(to right, #CAC531, #F3F9A7);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.yellow-bg input,
+.yellow-bg textarea {
+  color: black;
+  border-color: black;
+  background-color: #00000030;
+}
+
+.pink-bg {
+  color: white;
+  fill: white;
+  border-color: #b91d73;
+  background: #f953c6;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#b91d73), to(#f953c6));
+  background: linear-gradient(to right, #b91d73, #f953c6);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.pink-bg input,
+.pink-bg textarea {
+  color: white;
+  border-color: white;
+  background-color: #FFFFFF30;
+}
+
+.blue-bg {
+  color: white;
+  fill: white;
+  border-color: #2193b0;
+  background: #2193b0;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#2193b0), to(#6dd5ed));
+  background: linear-gradient(to right, #2193b0, #6dd5ed);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.blue-bg input,
+.blue-bg textarea {
+  color: white;
+  border-color: white;
+  background-color: #FFFFFF30;
+}
+
+.purple-bg {
+  color: white;
+  fill: white;
+  border-color: #4A00E0;
+  background: #8E2DE2;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#4A00E0), to(#8E2DE2));
+  background: linear-gradient(to right, #4A00E0, #8E2DE2);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.purple-bg input,
+.purple-bg textarea {
+  color: white;
+  border-color: white;
+  background-color: #FFFFFF30;
+}
+
+.black-bg {
+  color: white;
+  fill: white;
+  border-color: #232526;
+  background: #232526;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#232526), to(#414345));
+  background: linear-gradient(to right, #232526, #414345);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.black-bg input,
+.black-bg textarea {
+  color: white;
+  border-color: white;
+  background-color: #FFFFFF30;
+}
+
+.white-bg {
+  color: black;
+  fill: black;
+  background: #FFEFBA;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#FFEFBA), to(#FFFFFF));
+  background: linear-gradient(to right, #FFEFBA, #FFFFFF);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.white-bg input,
+.white-bg textarea {
+  color: black;
+  border-color: black;
+  background-color: #00000030;
+}
+/*# sourceMappingURL=colors.css.map */
