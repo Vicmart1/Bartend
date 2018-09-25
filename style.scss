@@ -52,6 +52,13 @@ body.fixed
   overflow: hidden;
 }
 
+body.fixedMobile
+{
+  @include mobile {
+    position: fixed;
+  }
+}
+
 #rootCocktails
 {
   max-width: 1000px;
@@ -135,6 +142,29 @@ body.fixed
   top: 0px;
 }
 
+#modalCocktail
+{
+  .cocktail
+  {
+    overflow: scroll;
+    
+    @include mobile() {
+      height: 80%;
+    }
+  }
+
+  .cocktail.to-top
+  {
+    @include mobile() {
+      height: calc(100vh - 150px);
+      margin-top: 0px;
+      border-radius: 0;
+      overflow: scroll;
+      padding-bottom: 110px;
+    }
+  }
+}
+
 #overlay
 {
   @include transition(opacity 0.25s ease-out);
@@ -183,6 +213,7 @@ body.fixed
   padding: 20px;
   margin: 10px;
   position: relative;
+  @include transition(all 0.25s);
 
   @include mobile {
     margin: 15px;
@@ -239,7 +270,11 @@ body.fixed
       }
     }
 
-    .newIngredient {
+    .newIngredient,
+    .subIngredient {
+      display: table;
+      cursor: pointer;
+
       svg
       {
         top: 6px;
@@ -252,15 +287,12 @@ body.fixed
   input,
   textarea
   {
-    background: none;
     border: none;
-    border-bottom-width: 2px;
-    border-bottom-style: solid;
     outline-width: 0;
     font-size: 1.25em;
     font-family: Avenir;
-    border-radius: 0px;
-    padding: 0px;
+    border-radius: 5px;
+    padding: 2.5px 5px;
   }
 
   input
@@ -273,14 +305,12 @@ body.fixed
   }
 
   textarea {
+    border-radius: 10px;
     font-size: 1em;
-    width: 100%;
+    width: calc(100% - 30px);
     height: 100px;
     resize: none;
-    border-left-width: 2px;
-    border-left-style: solid;
-    border-bottom-width: 0px;
-    padding: 0px 5px;
+    padding: 10px 15px;
 
     @include mobile 
     {
@@ -303,6 +333,7 @@ body.fixed
     position: absolute;
     top: 20px;
     right: 20px;
+    cursor: pointer;
   }
 
   .exitIcon
@@ -311,5 +342,6 @@ body.fixed
     top: 20px;
     right: 20px;
     display: none;
+    cursor: pointer;
   }
 }
