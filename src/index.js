@@ -36,7 +36,9 @@ var createIngredient = function(type, amount, isAlcohol, isLiquid) {
       } else {
         var ingredient = results[0];
         ingredient.set("isAlcohol", isAlcohol);
-        ingredient.set("amount", amount);
+        if (amount != -1) {
+          ingredient.set("amount", amount);
+        }
         ingredient.set("isLiquid", isLiquid);
 
         ingredient.save()
@@ -81,7 +83,7 @@ function queryItem(id, type) {
   });
 }
 
-var prepareCocktail = function(name, recipe, ingredients, color) {
+export default function prepareCocktail(name, recipe, ingredients, color) {
   return new Promise((resolve, reject) => {
     var ingredientsObjects = [];
     addIngredients(ingredients)
@@ -280,6 +282,7 @@ function makeAnother() {
       console.log(error);
     });
 
+    /**
     var queryCocktail = new Parse.Query(Cocktail);
     queryCocktail.find()
     .then((cocktails) => {
@@ -294,7 +297,7 @@ function makeAnother() {
       ReactDOM.render(<IngredientContainer ingredients={ingredients}/>, document.querySelector('#rootIngredients'));
     }, (error) => {
       console.log(error);
-    });
+    });**/
 
     /**deleteCocktail('mojito')
     .then((string) => {
@@ -306,3 +309,12 @@ function makeAnother() {
     console.log(error);
   });
 }
+
+
+var queryIngredient = new Parse.Query(Ingredient);
+queryIngredient.find()
+.then((ingredients) => {
+  ReactDOM.render(<IngredientContainer ingredients={ingredients}/>, document.querySelector('#rootIngredients'));
+}, (error) => {
+  console.log(error);
+});
