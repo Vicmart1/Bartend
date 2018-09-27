@@ -188,6 +188,11 @@ body.fixedMobile
   top: 0px;
 }
 
+.modal.fixed
+{
+  overflow: hidden;
+}
+
 #overlay
 {
   @include transition(opacity 0.25s ease-out);

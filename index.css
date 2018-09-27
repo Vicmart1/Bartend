@@ -139,6 +139,10 @@ body.fixed {
   top: 0px;
 }
 
+.modal.fixed {
+  overflow: hidden;
+}
+
 #overlay {
   -webkit-transition: opacity 0.25s ease-out;
   transition: opacity 0.25s ease-out;
