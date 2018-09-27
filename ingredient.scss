@@ -1,0 +1,93 @@
+@import "index.scss";
+
+#rootIngredients
+{
+  max-width: 400px;
+  margin: auto;
+  @include perspective(1000);
+  @include perspective-origin(center);
+}
+
+.ingredientTilesContainer
+{
+  border-radius: 10px;
+  margin: auto;
+  width: 660px;
+
+  @include mobile
+  {
+    width: 100vw;
+    height: 100vh;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    padding: 0px;
+    margin-top: 0px;
+  }
+}
+
+.ingredientTiles
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 10px -10px;
+  padding: 15px;
+
+  @include transition(all 0.25s);
+
+  @include mobile {
+    grid-template-columns: 1fr 1fr;
+    padding: 15px;
+    margin: 0px;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 125px;
+  }
+}
+
+.ingredientTile
+{
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin: 15px;
+  height: 146px;
+
+  position: relative;
+  @include transition(all 0.25s);
+
+  @include mobile {
+    padding: 10px 15px;
+    margin: 10px;
+    height: 123px;
+  }
+
+  .title
+  {
+    margin-top: 0px;
+    margin-bottom: 20px;
+    line-height: 25px;
+    font-size: 2em;
+    line-height: 110%;
+    
+    width: calc(100% - 40px);
+
+    @include mobile {
+      font-size: 1.5em;
+    }
+  }
+
+  .amount 
+  {
+    opacity: 0.75;
+    font-style: italic;
+    line-height: 100%;
+  }
+}
+
+.modal
+{
+  .ingredientTiles
+  {
+    margin: auto;
+  }
+}

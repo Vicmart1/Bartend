@@ -53,17 +53,6 @@ body.fixed {
   display: none;
 }
 
-#rootCocktails {
-  max-width: 1000px;
-  margin: auto;
-  -o-perspective: 1000;
-  -webkit-perspective: 1000;
-  perspective: 1000;
-  -o-perspective-origin: center;
-  -webkit-perspective-origin: center;
-  perspective-origin: center;
-}
-
 .modal {
   position: fixed;
   top: 100vh;
@@ -126,6 +115,7 @@ body.fixed {
     margin-top: 0px;
     border-radius: 0;
     overflow: scroll;
+    -webkit-overflow-scrolling: touch;
     padding-bottom: 110px;
   }
 }
@@ -170,159 +160,98 @@ body.fixed {
   opacity: 0.75;
 }
 
-.cocktails {
+#rootIngredients {
+  max-width: 400px;
+  margin: auto;
+  -o-perspective: 1000;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+  -o-perspective-origin: center;
+  -webkit-perspective-origin: center;
+  perspective-origin: center;
+}
+
+.ingredientTilesContainer {
+  border-radius: 10px;
+  margin: auto;
+  width: 660px;
+}
+
+@media (max-width: 899px) {
+  .ingredientTilesContainer {
+    width: 100vw;
+    height: 100vh;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    padding: 0px;
+    margin-top: 0px;
+  }
+}
+
+.ingredientTiles {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 50% 50%;
-      grid-template-columns: 50% 50%;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
   margin: 10px -10px;
+  padding: 15px;
   -webkit-transition: all 0.25s;
   transition: all 0.25s;
 }
 
 @media (max-width: 899px) {
-  .cocktails {
-    display: block;
-    margin: 10px 0px;
+  .ingredientTiles {
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    padding: 15px;
+    margin: 0px;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 125px;
   }
 }
 
-.cocktails.background {
-  -webkit-transform: translateZ(-25px);
-  transform: translateZ(-25px);
-}
-
-.cocktail {
-  -webkit-box-shadow: 0px 0px 5px #CCC, 0px 0px 1px #999;
-          box-shadow: 0px 0px 5px #CCC, 0px 0px 1px #999;
+.ingredientTile {
+  cursor: pointer;
   border-radius: 10px;
-  padding: 20px;
-  margin: 10px;
+  padding: 15px 20px;
+  margin: 15px;
+  height: 146px;
   position: relative;
   -webkit-transition: all 0.25s;
   transition: all 0.25s;
 }
 
 @media (max-width: 899px) {
-  .cocktail {
-    margin: 15px;
+  .ingredientTile {
+    padding: 10px 15px;
+    margin: 10px;
+    height: 123px;
   }
 }
 
-.cocktail .title {
+.ingredientTile .title {
   margin-top: 0px;
-  margin-bottom: 0px;
+  margin-bottom: 20px;
   line-height: 25px;
+  font-size: 2em;
+  line-height: 110%;
   width: calc(100% - 40px);
 }
 
-.cocktail .ingredientTitle {
-  margin-bottom: 0px;
+@media (max-width: 899px) {
+  .ingredientTile .title {
+    font-size: 1.5em;
+  }
 }
 
-.cocktail .ingredients {
-  list-style: none;
-  padding-left: 20px;
-}
-
-.cocktail .ingredients .ingredient {
-  position: relative;
-  width: calc(100% - 50px);
-}
-
-.cocktail .ingredients .ingredient .number {
-  font-size: 1.25em;
-}
-
-.cocktail .ingredients .ingredient .altText {
-  margin-top: -4px;
-  padding-left: 20px;
-  opacity: 0.5;
+.ingredientTile .amount {
+  opacity: 0.75;
   font-style: italic;
-  font-size: 0.85em;
+  line-height: 100%;
 }
 
-.cocktail .ingredients .ingredient .mainText {
-  display: inline-block;
+.modal .ingredientTiles {
+  margin: auto;
 }
-
-.cocktail .ingredients .ingredient .mainText span .mainInput {
-  width: 50px;
-  text-align: right;
-}
-
-.cocktail .ingredients .ingredient .trashIcon {
-  position: relative;
-  top: 5px;
-  cursor: pointer;
-}
-
-.cocktail .ingredients .newIngredient,
-.cocktail .ingredients .subIngredient {
-  display: table;
-  cursor: pointer;
-}
-
-.cocktail .ingredients .newIngredient svg,
-.cocktail .ingredients .subIngredient svg {
-  top: 6px;
-  position: relative;
-  margin-right: 3px;
-}
-
-.cocktail input,
-.cocktail textarea {
-  border: none;
-  outline-width: 0;
-  font-size: 1.25em;
-  font-family: Avenir;
-  border-radius: 5px;
-  padding: 2.5px 5px;
-}
-
-@media (max-width: 899px) {
-  .cocktail input {
-    max-width: 150px;
-    margin: 10px 0;
-  }
-}
-
-.cocktail textarea {
-  border-radius: 10px;
-  font-size: 1em;
-  width: calc(100% - 30px);
-  height: 100px;
-  resize: none;
-  padding: 10px 15px;
-}
-
-@media (max-width: 899px) {
-  .cocktail textarea {
-    height: 200px;
-    font-size: 1.25em;
-  }
-}
-
-.cocktail *:focus {
-  outline: none;
-}
-
-.cocktail .canMake {
-  margin-top: 1em;
-}
-
-.cocktail .editIcon {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-}
-
-.cocktail .exitIcon {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  display: none;
-  cursor: pointer;
-}
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=ingredient.css.map */

@@ -53,17 +53,6 @@ body.fixed {
   display: none;
 }
 
-#rootCocktails {
-  max-width: 1000px;
-  margin: auto;
-  -o-perspective: 1000;
-  -webkit-perspective: 1000;
-  perspective: 1000;
-  -o-perspective-origin: center;
-  -webkit-perspective-origin: center;
-  perspective-origin: center;
-}
-
 .modal {
   position: fixed;
   top: 100vh;
@@ -168,6 +157,17 @@ body.fixed {
 
 #overlay.show {
   opacity: 0.75;
+}
+
+#rootCocktails {
+  max-width: 1000px;
+  margin: auto;
+  -o-perspective: 1000;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+  -o-perspective-origin: center;
+  -webkit-perspective-origin: center;
+  perspective-origin: center;
 }
 
 .cocktails {
@@ -325,4 +325,4 @@ body.fixed {
   display: none;
   cursor: pointer;
 }
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=cocktail.css.map */
