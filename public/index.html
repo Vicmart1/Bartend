@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="colors.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="cocktail.css" />
+    <link rel="stylesheet" href="ingredient.css" />
     <link rel="manifest" href="manifest.json">
     <title>Bartend</title>
   </head>
@@ -13,10 +15,11 @@
     <div id="loadScreen">
       Loading...
     </div>
-    <div id="rootCocktails"></div>
     <div id="rootIngredients"></div>
-    <div id="modalCocktail"></div>
+    <div id="rootCocktails"></div>
     <div id="overlay"></div>
+    <div id="modalCocktail" class="modal"></div>
+    <div id="modalIngredients" class="modal"></div>
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="https://npmcdn.com/parse@2.1.0/dist/parse.min.js" crossorigin></script>

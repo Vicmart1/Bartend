@@ -11,7 +11,8 @@
 }
 
 .green-bg input,
-.green-bg textarea {
+.green-bg textarea,
+.green-bg .ingredientTile {
   color: white;
   border-color: white;
   background-color: #FFFFFF30;
@@ -30,7 +31,8 @@
 }
 
 .orange-bg input,
-.orange-bg textarea {
+.orange-bg textarea,
+.orange-bg .ingredientTile {
   color: white;
   border-color: white;
   background-color: #FFFFFF30;
@@ -49,7 +51,8 @@
 }
 
 .red-bg input,
-.red-bg textarea {
+.red-bg textarea,
+.red-bg .ingredientTile {
   color: white;
   border-color: white;
   background-color: #FFFFFF30;
@@ -68,7 +71,8 @@
 }
 
 .yellow-bg input,
-.yellow-bg textarea {
+.yellow-bg textarea,
+.yellow-bg .ingredientTile {
   color: black;
   border-color: black;
   background-color: #00000030;
@@ -87,7 +91,8 @@
 }
 
 .pink-bg input,
-.pink-bg textarea {
+.pink-bg textarea,
+.pink-bg .ingredientTile {
   color: white;
   border-color: white;
   background-color: #FFFFFF30;
@@ -106,7 +111,8 @@
 }
 
 .blue-bg input,
-.blue-bg textarea {
+.blue-bg textarea,
+.blue-bg .ingredientTile {
   color: white;
   border-color: white;
   background-color: #FFFFFF30;
@@ -125,7 +131,8 @@
 }
 
 .purple-bg input,
-.purple-bg textarea {
+.purple-bg textarea,
+.purple-bg .ingredientTile {
   color: white;
   border-color: white;
   background-color: #FFFFFF30;
@@ -144,7 +151,8 @@
 }
 
 .black-bg input,
-.black-bg textarea {
+.black-bg textarea,
+.black-bg .ingredientTile {
   color: white;
   border-color: white;
   background-color: #FFFFFF30;
@@ -162,7 +170,8 @@
 }
 
 .white-bg input,
-.white-bg textarea {
+.white-bg textarea,
+.white-bg .ingredientTile {
   color: black;
   border-color: black;
   background-color: #00000030;

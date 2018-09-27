@@ -1,0 +1,175 @@
+@import "index";
+
+#rootCocktails
+{
+  max-width: 1000px;
+  margin: auto;
+  @include perspective(1000);
+  @include perspective-origin(center);
+}
+
+.cocktails
+{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin: 10px -10px;
+  @include transition(all 0.25s);
+
+  @include mobile {
+    display: block;
+    margin: 10px 0px;
+  }
+}
+
+.cocktails.background
+{
+  @include transform(translateZ(-25px));
+}
+
+.cocktail
+{
+  box-shadow: 0px 0px 5px #CCC, 0px 0px 1px #999;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  position: relative;
+  @include transition(all 0.25s);
+
+  @include mobile {
+    margin: 15px;
+  }
+
+  .title
+  {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    line-height: 25px;
+    
+    width: calc(100% - 40px);
+  }
+
+  .ingredientTitle
+  {
+    margin-bottom: 0px;
+  }
+
+  .ingredients
+  {
+    list-style: none;
+    padding-left: 20px;
+    
+    .ingredient
+    {
+      position: relative;
+      width: calc(100% - 50px);
+
+      .number
+      {
+        font-size: 1.25em;
+      }  
+
+      .altText 
+      {
+        margin-top: -4px;
+        padding-left: 20px;
+        opacity: 0.5;
+        font-style: italic;
+        font-size: 0.85em;
+      }
+
+      .mainText
+      {
+        display: inline-block;
+        span
+        {
+          .mainInput
+          {
+            width: 50px;
+            text-align: right;
+          }
+        }
+      }
+
+      .trashIcon
+      {
+        position: relative;
+        top: 5px;
+        cursor: pointer;
+      }
+    }
+
+    .newIngredient,
+    .subIngredient {
+      display: table;
+      cursor: pointer;
+
+      svg
+      {
+        top: 6px;
+        position: relative;
+        margin-right: 3px;
+      }
+    }
+  }
+
+  input,
+  textarea
+  {
+    border: none;
+    outline-width: 0;
+    font-size: 1.25em;
+    font-family: Avenir;
+    border-radius: 5px;
+    padding: 2.5px 5px;
+  }
+
+  input
+  {
+    @include mobile 
+    {
+      max-width: 150px;
+      margin: 10px 0;
+    }
+  }
+
+  textarea {
+    border-radius: 10px;
+    font-size: 1em;
+    width: calc(100% - 30px);
+    height: 100px;
+    resize: none;
+    padding: 10px 15px;
+
+    @include mobile 
+    {
+      height: 200px;
+      font-size: 1.25em;
+    }
+  }
+
+  *:focus {
+    outline: none;
+  }
+
+  .canMake
+  {
+    margin-top: 1em;
+  }
+
+  .editIcon
+  {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+  }
+
+  .exitIcon
+  {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: none;
+    cursor: pointer;
+  }
+}

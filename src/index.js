@@ -311,10 +311,10 @@ function makeAnother() {
 }
 
 
-var queryIngredient = new Parse.Query(Ingredient);
+/**var queryIngredient = new Parse.Query(Ingredient);
 queryIngredient.find()
 .then((ingredients) => {
   ReactDOM.render(<IngredientContainer ingredients={ingredients}/>, document.querySelector('#rootIngredients'));
 }, (error) => {
   console.log(error);
-});
+});**/

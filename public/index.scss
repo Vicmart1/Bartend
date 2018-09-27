@@ -1,0 +1,217 @@
+$desktop-width: 900px;
+
+@mixin transition($transition...) {
+  -moz-transition:    $transition;
+  -o-transition:      $transition;
+  -webkit-transition: $transition;
+  transition:         $transition;
+}
+
+@mixin transform($transform...) {
+  -moz-transform:    $transform;
+  -o-transform:      $transform;
+  -webkit-transform: $transform;
+  transform:         $transform;
+}
+
+@mixin perspective($perspective...) {
+  -moz-perspective:    $perspective;
+  -o-perspective:      $perspective;
+  -webkit-perspective: $perspective;
+  perspective:         $perspective;
+}
+
+@mixin perspective-origin($perspective-origin...) {
+  -moz-perspective-origin:    $perspective-origin;
+  -o-perspective-origin:      $perspective-origin;
+  -webkit-perspective-origin: $perspective-origin;
+  perspective-origin:         $perspective-origin;
+}
+
+@mixin mobile {
+  @media (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+html, body
+{
+  font-family: Avenir, Arial, Helvetica, sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+
+body.fixed
+{
+  overflow: hidden;
+}
+
+body.fixedMobile
+{
+  @include mobile {
+    position: fixed;
+  }
+}
+
+.alert {
+  position: fixed;
+  top: -50px;
+  left: 0px;
+  width: 100vw;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  z-index: 10;
+  padding-top: 5px;
+  background-color: white;
+  box-shadow: 0px 0px 3px #BBB, 0px 0px 1px #999;
+  @include transition(all 0.1s);
+}
+
+.alert.show {
+  top: 0px;
+}
+
+#loadScreen {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  line-height: 100vh;
+  font-size: 18px;
+  text-align: center;
+  background-color: white;
+}
+
+#loadScreen.hide {
+  display: none;
+}
+
+.modal
+{
+  position: fixed;
+  top: 100vh;
+  left: 0;
+  width: 100vw;
+  margin: auto;
+  height: 100vh;
+  z-index: 10;
+  display: flex;
+  @include transition(top 0.25s ease-out);
+
+  .cocktail {
+    box-shadow: none;
+    max-width: 600px;
+    width: 600px;
+    margin: auto;
+    overflow: scroll;
+
+    .editIcon
+    {
+      top: 70px;
+      right: 19px;
+    }
+
+    .exitIcon
+    {
+      display: block;
+    }
+
+    .editIcon,
+    .exitIcon
+    {
+      width: 36px;
+      height: 36px;
+    }
+
+    .title
+    {
+      line-height: 36px;
+      width: calc(100% - 60px);
+    }
+
+    @include mobile {
+      margin: 0px;
+      margin-top: 15vh;
+      height: 80%;
+    }
+  }
+
+  .cocktail.to-top
+  {
+    .ingredients
+    {
+      padding-left: 0px;
+    }
+
+    @include mobile() {
+      height: calc(100vh - 150px);
+      margin-top: 0px;
+      border-radius: 0;
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch;  
+      padding-bottom: 110px;
+    }
+  }
+
+  @include desktop {
+    .cocktail {
+      padding: 30px;
+      padding-bottom: 40px;
+    
+      .exitIcon
+      {
+        top: 30px;
+        right: 30px;
+      }
+
+      .editIcon
+      {
+        top: 75px;
+        right: 29px;
+      }
+    }
+  }
+}
+
+.modal.active 
+{
+  top: 0px;
+}
+
+.modal.fixed
+{
+  overflow: hidden;
+}
+
+#overlay
+{
+  @include transition(opacity 0.25s ease-out);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000000;
+  opacity: 0;
+  z-index: -1;
+}
+
+#overlay.active
+{
+  z-index: 9;
+}
+
+#overlay.show
+{
+  opacity: 0.75;
+}
