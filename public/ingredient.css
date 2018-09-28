@@ -139,6 +139,10 @@ body.fixed {
   top: 0px;
 }
 
+.modal.fixed {
+  overflow: hidden;
+}
+
 #overlay {
   -webkit-transition: opacity 0.25s ease-out;
   transition: opacity 0.25s ease-out;
@@ -171,14 +175,15 @@ body.fixed {
   perspective-origin: center;
 }
 
-.ingredientTilesContainer {
+#ingredientTilesContainer {
   border-radius: 10px;
   margin: auto;
   width: 660px;
 }
 
 @media (max-width: 899px) {
-  .ingredientTilesContainer {
+  #ingredientTilesContainer {
+    border-radius: 0px;
     width: 100vw;
     height: 100vh;
     overflow: scroll;
@@ -191,10 +196,11 @@ body.fixed {
 .ingredientTiles {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-columns: 33.3% 33.3% 33.3%;
+      grid-template-columns: 33.3% 33.3% 33.3%;
   margin: 10px -10px;
-  padding: 15px;
+  padding: 60px 15px;
+  position: relative;
   -webkit-transition: all 0.25s;
   transition: all 0.25s;
 }
@@ -203,7 +209,7 @@ body.fixed {
   .ingredientTiles {
     -ms-grid-columns: 1fr 1fr;
         grid-template-columns: 1fr 1fr;
-    padding: 15px;
+    padding: 60px 15px;
     margin: 0px;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
@@ -211,12 +217,20 @@ body.fixed {
   }
 }
 
+.ingredientTiles .exitIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+
 .ingredientTile {
   cursor: pointer;
   border-radius: 10px;
   padding: 15px 20px;
   margin: 15px;
-  height: 146px;
   position: relative;
   -webkit-transition: all 0.25s;
   transition: all 0.25s;
@@ -226,7 +240,6 @@ body.fixed {
   .ingredientTile {
     padding: 10px 15px;
     margin: 10px;
-    height: 123px;
   }
 }
 
@@ -253,5 +266,18 @@ body.fixed {
 
 .modal .ingredientTiles {
   margin: auto;
+}
+
+.addTile .title {
+  font-size: 1.5em;
+  font-weight: normal;
+}
+
+.addTile svg {
+  width: 50px;
+  height: 50px;
+  margin-left: -12px;
+  margin-top: -5px;
+  margin-bottom: -5px;
 }
 /*# sourceMappingURL=ingredient.css.map */

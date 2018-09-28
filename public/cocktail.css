@@ -115,6 +115,7 @@ body.fixed {
     margin-top: 0px;
     border-radius: 0;
     overflow: scroll;
+    -webkit-overflow-scrolling: touch;
     padding-bottom: 110px;
   }
 }
@@ -136,6 +137,10 @@ body.fixed {
 
 .modal.active {
   top: 0px;
+}
+
+.modal.fixed {
+  overflow: hidden;
 }
 
 #overlay {
@@ -190,6 +195,11 @@ body.fixed {
 .cocktails.background {
   -webkit-transform: translateZ(-25px);
   transform: translateZ(-25px);
+}
+
+.cocktails.background-2 {
+  -webkit-transform: translateZ(-50px);
+  transform: translateZ(-50px);
 }
 
 .cocktail {

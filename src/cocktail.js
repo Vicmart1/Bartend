@@ -84,7 +84,10 @@ class CocktailTile extends React.Component {
     });
 
     document.getElementById("modalIngredients").classList.remove("active");
-    document.getElementById("modalCocktail").children[0].classList.remove("background");
+    document.getElementById("rootCocktails").children[0].classList.remove("background-2");
+    setTimeout(function() {
+      document.getElementById("ingredientTilesContainer").className = "";
+    }, 250);
   }
 
   addIngredient() {
@@ -380,6 +383,7 @@ window.openIngredientModal = function (color, usedIngredients) {
   var queryIngredient = new Parse.Query(Ingredient);
   queryIngredient.find()
   .then((ingredients) => {
+    ReactDOM.unmountComponentAtNode(document.querySelector('#modalIngredients'));
     ReactDOM.render(<IngredientContainer ref={(ingredientObjects) => {window.ingredientObjects = ingredientObjects}} key="ingredients" ingredients={ingredients} usedIngredients={usedIngredients}/>, document.querySelector('#modalIngredients'));
     document.getElementById("modalIngredients").classList.add("active");
 
@@ -388,6 +392,17 @@ window.openIngredientModal = function (color, usedIngredients) {
     } else {
       document.getElementById("modalIngredients").children[0].classList.add("white-bg");
     }
+
+    if (!window.mobilecheck) {
+      document.getElementsByClassName("ingredientTiles")[0].style.minHeight = (document.getElementById("modalCocktail").children[0].offsetHeight - 120) + "px";
+    }
+
+    document.getElementById("rootCocktails").children[0].classList.add("background-2");
+
+    document.querySelectorAll(".ingredientTile").forEach(function(tile) {
+      var width = tile.offsetWidth;
+      tile.style.height = (width - 30) + "px";
+    });
     
     }, (error) => {
     console.log(error);
