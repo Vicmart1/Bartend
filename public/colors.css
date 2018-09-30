@@ -18,6 +18,22 @@
   background-color: #FFFFFF30;
 }
 
+.green-bg input::-webkit-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.green-bg input:-ms-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.green-bg input::-ms-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.green-bg input::placeholder {
+  color: #FFFFFF60;
+}
+
 .orange-bg {
   color: white;
   fill: white;
@@ -36,6 +52,22 @@
   color: white;
   border-color: white;
   background-color: #FFFFFF30;
+}
+
+.orange-bg input::-webkit-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.orange-bg input:-ms-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.orange-bg input::-ms-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.orange-bg input::placeholder {
+  color: #FFFFFF60;
 }
 
 .red-bg {
@@ -58,6 +90,22 @@
   background-color: #FFFFFF30;
 }
 
+.red-bg input::-webkit-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.red-bg input:-ms-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.red-bg input::-ms-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.red-bg input::placeholder {
+  color: #FFFFFF60;
+}
+
 .yellow-bg {
   color: black;
   fill: black;
@@ -76,6 +124,22 @@
   color: black;
   border-color: black;
   background-color: #00000030;
+}
+
+.yellow-bg input::-webkit-input-placeholder {
+  color: #00000060;
+}
+
+.yellow-bg input:-ms-input-placeholder {
+  color: #00000060;
+}
+
+.yellow-bg input::-ms-input-placeholder {
+  color: #00000060;
+}
+
+.yellow-bg input::placeholder {
+  color: #00000060;
 }
 
 .pink-bg {
@@ -98,6 +162,22 @@
   background-color: #FFFFFF30;
 }
 
+.pink-bg input::-webkit-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.pink-bg input:-ms-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.pink-bg input::-ms-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.pink-bg input::placeholder {
+  color: #FFFFFF60;
+}
+
 .blue-bg {
   color: white;
   fill: white;
@@ -116,6 +196,22 @@
   color: white;
   border-color: white;
   background-color: #FFFFFF30;
+}
+
+.blue-bg input::-webkit-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.blue-bg input:-ms-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.blue-bg input::-ms-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.blue-bg input::placeholder {
+  color: #FFFFFF60;
 }
 
 .purple-bg {
@@ -138,6 +234,22 @@
   background-color: #FFFFFF30;
 }
 
+.purple-bg input::-webkit-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.purple-bg input:-ms-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.purple-bg input::-ms-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.purple-bg input::placeholder {
+  color: #FFFFFF60;
+}
+
 .black-bg {
   color: white;
   fill: white;
@@ -158,6 +270,22 @@
   background-color: #FFFFFF30;
 }
 
+.black-bg input::-webkit-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.black-bg input:-ms-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.black-bg input::-ms-input-placeholder {
+  color: #FFFFFF60;
+}
+
+.black-bg input::placeholder {
+  color: #FFFFFF60;
+}
+
 .white-bg {
   color: black;
   fill: black;
@@ -175,5 +303,21 @@
   color: black;
   border-color: black;
   background-color: #00000030;
+}
+
+.white-bg input::-webkit-input-placeholder {
+  color: #00000060;
+}
+
+.white-bg input:-ms-input-placeholder {
+  color: #00000060;
+}
+
+.white-bg input::-ms-input-placeholder {
+  color: #00000060;
+}
+
+.white-bg input::placeholder {
+  color: #00000060;
 }
 /*# sourceMappingURL=colors.css.map */

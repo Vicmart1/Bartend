@@ -1,7 +1,12 @@
+// eslint-disable-next-line 
 import React from 'react';
+// eslint-disable-next-line 
 import ReactDOM from 'react-dom';
+// eslint-disable-next-line 
 import CocktailContainer from './cocktail.js';
+// eslint-disable-next-line 
 import IngredientContainer from './ingredient.js';
+// eslint-disable-next-line 
 import enableScroll from './cocktail.js';
 
 var Parse = require('parse');
@@ -12,6 +17,7 @@ const Cocktail = Parse.Object.extend("CocktailTest");
 const Ingredient = Parse.Object.extend("IngredientTest");
 
 const ozToMl = (oz) => (oz * 29.5735);
+// eslint-disable-next-line 
 const mlToOz = (ml) => (ml / 29.5735);
 
 var createIngredient = function(type, amount, isAlcohol, isLiquid) {
@@ -36,7 +42,7 @@ var createIngredient = function(type, amount, isAlcohol, isLiquid) {
       } else {
         var ingredient = results[0];
         ingredient.set("isAlcohol", isAlcohol);
-        if (amount != -1) {
+        if (amount !== -1) {
           ingredient.set("amount", amount);
         }
         ingredient.set("isLiquid", isLiquid);
@@ -123,6 +129,7 @@ var updateCocktail = function(recipe, ingredients, color, ingredientsObjects, co
 
       cocktail.set("recipe", recipe);
       cocktail.set("color", color);
+      cocktail.set("ingredientsNum", ingredientsObjects.length);
 
       for (var i = 0 ; i < ingredientsObjects.length; i++) {
         // eslint-disable-next-line
@@ -157,6 +164,7 @@ var createCocktail = function(name, recipe, ingredients, color, ingredientsObjec
         cocktail.set("name", name.toLowerCase());
         cocktail.set("recipe", recipe);
         cocktail.set("color", color);
+        cocktail.set("ingredientsNum", ingredientsObjects.length);
 
         var relation = cocktail.relation("ingredients");
         for (var i = 0 ; i < ingredientsObjects.length; i++) {

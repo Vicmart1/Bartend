@@ -24,7 +24,7 @@ body.fixed {
   text-align: center;
   font-weight: bold;
   font-size: 18px;
-  z-index: 10;
+  z-index: 999;
   padding-top: 5px;
   background-color: white;
   -webkit-box-shadow: 0px 0px 3px #BBB, 0px 0px 1px #999;

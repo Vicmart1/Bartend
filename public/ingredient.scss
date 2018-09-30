@@ -28,21 +28,20 @@
 
 .ingredientTiles
 {
-  display: grid;
-  grid-template-columns: 33.3% 33.3% 33.3%;
   margin: 10px -10px;
   padding: 60px 15px;
   position: relative;
+  max-height: calc(100vh - 120px);
+  overflow: scroll;
 
   @include transition(all 0.25s);
 
   @include mobile {
-    grid-template-columns: 1fr 1fr;
     padding: 60px 15px;
     margin: 0px;
+    max-height: calc(100vh - 230px);
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 125px;
   }
 
   .exitIcon
@@ -62,11 +61,14 @@
   border-radius: 10px;
   padding: 15px 20px;
   margin: 15px;
+  width: calc(33% - 68px);
+  float: left;
 
   position: relative;
-  @include transition(all 0.25s);
+  @include transition(all 0.25s, width 0.5s);
 
   @include mobile {
+    width: calc(50% - 50px);
     padding: 10px 15px;
     margin: 10px;
   }
@@ -117,5 +119,53 @@
     margin-left: -12px;
     margin-top: -5px;
     margin-bottom: -5px;
+  }
+
+  .addInput,
+  .amountInput
+  {
+    width: calc(100% - 50px);
+    float: right;
+    border: none;
+    outline-width: 0;
+    font-size: 1.25em;
+    font-family: Avenir;
+    border-radius: 5px;
+    padding: 2.5px 5px;
+    margin-top: 4px;
+    opacity: 0;
+    @include transition(all 0.25s);
+  }
+
+  .amount
+  {
+    .amountInput
+    {
+      width: 50px;
+    }
+    
+    span
+    {
+      float: right;
+    }
+  }
+
+  *:focus {
+    outline: none;
+  }
+}
+
+.ingredientTile.extend
+{
+  width: calc(66% - 66px);
+
+  @include mobile {
+    width: calc(100% - 50px);
+  }
+
+  .addInput,
+  .amountInput
+  {
+    opacity: 1;
   }
 }

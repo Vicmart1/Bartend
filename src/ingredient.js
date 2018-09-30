@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import CocktailContainer from './cocktail.js';
 
 class IngredientTile extends React.Component {
@@ -16,8 +17,19 @@ class IngredientTile extends React.Component {
     }
   }
 
-  selectSelf() {
-    CocktailContainer.getIngredient(this.state.ingredientsObject.get("type"));
+  selectSelf(isNewIngredient) {
+    if (!isNewIngredient) {
+      CocktailContainer.getIngredient(this.state.ingredientsObject.get("type"));
+    } else {
+      document.querySelector(".addTile").classList.add("extend");
+    }
+  }
+
+  addIngredient(e) {
+    if(document.querySelector(".addTile").classList.contains("extend")) {
+      e.stopPropagation();
+      console.log("hello");
+    }
   }
 
   render() {
@@ -25,15 +37,17 @@ class IngredientTile extends React.Component {
       var unit = this.state.ingredientsObject.get('isLiquid') ? ' ml remaining' : ' ' + this.state.ingredientsObject.get('type') + '(s)';
 
       return (
-        <div className="ingredientTile" onClick={(event) => this.selectSelf(event, 0)}>
+        <div className="ingredientTile" onClick={(event) => this.selectSelf(false)}>
           <h3 className="title">{this.state.ingredientsObject.get('type')}</h3>
           <div className="amount">{this.state.ingredientsObject.get('amount')}{unit}</div>
         </div>
       );
     } else {
       return (
-        <div className="ingredientTile addTile">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path className="heroicon-ui" d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"/></svg>
+        <div className="ingredientTile addTile" onClick={(event) => this.selectSelf(true)}>
+          <svg onClick={(event) => this.addIngredient(event)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path className="heroicon-ui" d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"/></svg>
+          <input className="addInput" placeholder="ingredient name" />
+          <div className="amount"><span> ml</span><input className="amountInput" placeholder="750" /></div>
           <h3 className="title">add an ingredient</h3>
         </div>
       );
@@ -58,13 +72,13 @@ class IngredientContainer extends React.Component {
 
   render() {
     var ingredientsDOM = [];
+    ingredientsDOM.push(<IngredientTile key={"new"}/>);
+
     this.state.ingredients.forEach(ingredient => {
-      if (this.state.usedIngredients.filter(e => e.get("type") === ingredient.get("type")).length == 0) {
+      if (this.state.usedIngredients.filter(e => e.get("type") === ingredient.get("type")).length === 0) {
         ingredientsDOM.push(<IngredientTile key={ingredient.id} ingredient={ingredient}/>);
       }
     });
-
-    ingredientsDOM.push(<IngredientTile key={"new"}/>);
 
     return(
       <div id="ingredientTilesContainer">

@@ -10,6 +10,11 @@
     border-color: white;
     background-color: #FFFFFF30;
   }
+
+  input::placeholder
+  {
+    color: #FFFFFF60;
+  }
 }
 
 @mixin black-base {
@@ -23,6 +28,11 @@
     color: black;
     border-color: black;
     background-color: #00000030;
+  }
+
+  input::placeholder
+  {
+    color: #00000060;
   }
 }
 

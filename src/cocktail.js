@@ -6,6 +6,7 @@ import prepareCocktail from './index.js';
 const MAX_INGREDIENTS = 10;
 
 const ozToMl = (oz) => (oz * 29.5735);
+// eslint-disable-next-line 
 const mlToOz = (ml) => (ml / 29.5735);
 
 var lastMobileScroll = -1;
@@ -32,12 +33,16 @@ class CocktailTile extends React.Component {
     var relation = this.state.cocktailObject.relation("ingredients");
     relation.query().find()
     .then((ingredientsObjects) => {
-      this.setState({
+      !this.isCancelled && this.setState({
         ingredients: ingredientsObjects
       });
     }, (error) => {
       console.log(error);
     });
+  }
+
+  componentWillUnmount() {
+    this.isCancelled = true;
   }
 
   openModal(e) {
@@ -118,7 +123,7 @@ class CocktailTile extends React.Component {
     var ingredientsDOM = document.getElementById("modalCocktail").children[0].children[1].children;
     var ingredientsLength = ingredientsDOM.length;
     for (var i = 0; i < ingredientsLength - 1; i++) {
-      var amount = parseInt(ingredientsDOM[i].children[1].children[0].children[0].value, 10);
+      var amount = parseFloat(ingredientsDOM[i].children[1].children[0].children[0].value);
       var name = this.state.ingredients[i].get("type");
       var total = this.state.ingredients[i].get("amount");
       var isAlcohol = this.state.ingredients[i].get("isAlcohol");
@@ -155,12 +160,16 @@ class CocktailTile extends React.Component {
     });
   }
 
+  getHeight() {
+    return (this.state.cocktailObject.get("ingredientsNum") * 42) + 180;
+  }
+
   render() {
     var floorAmount = -1;
     var ingredientsDOM = [];
 
     this.state.ingredients.forEach(ingredient => {
-      var ingredientAmount = parseInt(this.state.cocktailObject.get("ID_" + ingredient.id), 10);
+      var ingredientAmount = parseFloat(this.state.cocktailObject.get("ID_" + ingredient.id));
       var ingredientTotal = ingredient.get('amount');
       var canMake = Math.floor(ingredientTotal/ozToMl(ingredientAmount));
       floorAmount = floorAmount === -1 || canMake < floorAmount ? canMake : floorAmount;
@@ -269,7 +278,7 @@ class CocktailContainer extends React.Component {
   
     this.state = {
       cocktailsDOM: cocktailDOMs
-    }
+    };
 
     document.getElementById("loadScreen").classList.add("hide");
   }
@@ -279,6 +288,8 @@ class CocktailContainer extends React.Component {
   }
 
   getCocktailObjects() {
+    this.cocktailObjects = window.cleanArray(this.cocktailObjects).filter(window.onlyUnique);
+
     return this.cocktailObjects;
   }
 
@@ -286,10 +297,54 @@ class CocktailContainer extends React.Component {
     return this.cocktailObjects[index].updateSelf();
   }
 
+  componentDidMount() {
+    this.resize();
+  }
+
+  resize() {
+    if (!window.mobilecheck()) {
+      var columns = 2;
+      var tempDOMs = [];
+      var heights = [];
+
+      for (var i = 0; i < columns; i++) {
+        tempDOMs.push([]);
+        heights.push(0);
+      }
+
+      var currentColumn = 0;
+
+      for (var i = 0; i < this.state.cocktailsDOM.length; i++) {
+        tempDOMs[currentColumn].push(this.state.cocktailsDOM[i]);
+        heights[currentColumn] = heights[currentColumn] + this.cocktailObjects[i].getHeight();
+
+        if (heights[currentColumn] == Math.max.apply(null, heights)) {
+          currentColumn = (currentColumn + 1) % columns;
+        }
+      }
+
+      var categoryDOMObjects = [];
+
+      tempDOMs.forEach(tempDOM => {
+        categoryDOMObjects.push(
+          <div className="CocktailGroup">
+            {tempDOM}
+          </div>
+        );
+      });
+
+      this.setState({
+        categoryDOMs: categoryDOMObjects
+      });
+    }
+  }
+
   render() {
+    var renderContent = this.state.categoryDOMs ? this.state.categoryDOMs : this.state.cocktailsDOM;
+
     return(
       <div className="cocktails">
-        {this.state.cocktailsDOM}
+        {renderContent}
       </div>
     );
   }
@@ -372,6 +427,7 @@ queryCocktail.find()
   console.log(error);
 });
 
+
 window.mobilecheck = function() {
   var check = false;
   // eslint-disable-next-line
@@ -393,7 +449,7 @@ window.openIngredientModal = function (color, usedIngredients) {
       document.getElementById("modalIngredients").children[0].classList.add("white-bg");
     }
 
-    if (!window.mobilecheck) {
+    if (!window.mobilecheck()) {
       document.getElementsByClassName("ingredientTiles")[0].style.minHeight = (document.getElementById("modalCocktail").children[0].offsetHeight - 120) + "px";
     }
 
@@ -407,4 +463,18 @@ window.openIngredientModal = function (color, usedIngredients) {
     }, (error) => {
     console.log(error);
   });
+}
+
+window.cleanArray = function(actual) {
+  var newArray = [];
+  for (var i = 0; i < actual.length; i++) {
+    if (actual[i]) {
+      newArray.push(actual[i]);
+    }
+  }
+  return newArray;
+}
+
+window.onlyUnique = function(value, index, self) { 
+  return self.indexOf(value) === index;
 }
