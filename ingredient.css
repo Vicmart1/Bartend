@@ -24,7 +24,7 @@ body.fixed {
   text-align: center;
   font-weight: bold;
   font-size: 18px;
-  z-index: 10;
+  z-index: 999;
   padding-top: 5px;
   background-color: white;
   -webkit-box-shadow: 0px 0px 3px #BBB, 0px 0px 1px #999;
@@ -194,26 +194,22 @@ body.fixed {
 }
 
 .ingredientTiles {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 33.3% 33.3% 33.3%;
-      grid-template-columns: 33.3% 33.3% 33.3%;
   margin: 10px -10px;
   padding: 60px 15px;
   position: relative;
+  max-height: calc(100vh - 120px);
+  overflow: scroll;
   -webkit-transition: all 0.25s;
   transition: all 0.25s;
 }
 
 @media (max-width: 899px) {
   .ingredientTiles {
-    -ms-grid-columns: 1fr 1fr;
-        grid-template-columns: 1fr 1fr;
     padding: 60px 15px;
     margin: 0px;
+    max-height: calc(100vh - 230px);
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 125px;
   }
 }
 
@@ -231,13 +227,16 @@ body.fixed {
   border-radius: 10px;
   padding: 15px 20px;
   margin: 15px;
+  width: calc(33% - 68px);
+  float: left;
   position: relative;
-  -webkit-transition: all 0.25s;
-  transition: all 0.25s;
+  -webkit-transition: all 0.25s, width 0.5s;
+  transition: all 0.25s, width 0.5s;
 }
 
 @media (max-width: 899px) {
   .ingredientTile {
+    width: calc(50% - 50px);
     padding: 10px 15px;
     margin: 10px;
   }
@@ -279,5 +278,48 @@ body.fixed {
   margin-left: -12px;
   margin-top: -5px;
   margin-bottom: -5px;
+}
+
+.addTile .addInput,
+.addTile .amountInput {
+  width: calc(100% - 50px);
+  float: right;
+  border: none;
+  outline-width: 0;
+  font-size: 1.25em;
+  font-family: Avenir;
+  border-radius: 5px;
+  padding: 2.5px 5px;
+  margin-top: 4px;
+  opacity: 0;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+}
+
+.addTile .amount .amountInput {
+  width: 50px;
+}
+
+.addTile .amount span {
+  float: right;
+}
+
+.addTile *:focus {
+  outline: none;
+}
+
+.ingredientTile.extend {
+  width: calc(66% - 66px);
+}
+
+@media (max-width: 899px) {
+  .ingredientTile.extend {
+    width: calc(100% - 50px);
+  }
+}
+
+.ingredientTile.extend .addInput,
+.ingredientTile.extend .amountInput {
+  opacity: 1;
 }
 /*# sourceMappingURL=ingredient.css.map */
