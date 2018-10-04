@@ -15,6 +15,21 @@
   {
     color: #FFFFFF60;
   }
+
+  .slider::-webkit-slider-thumb
+  {
+    background: #FFFFFF;
+  }
+
+  .slider::-moz-range-thumb
+  {
+    background: #FFFFFF;
+  }
+
+  input:checked
+  {
+    background: #FFFFFF;
+  }
 }
 
 @mixin black-base {
@@ -33,6 +48,21 @@
   input::placeholder
   {
     color: #00000060;
+  }
+
+  .slider::-webkit-slider-thumb
+  {
+    background: #000000;
+  }
+
+  .slider::-moz-range-thumb
+  {
+    background: #000000;
+  }
+
+  input:checked
+  {
+    background: black;
   }
 }
 
