@@ -22,14 +22,26 @@ class IngredientTile extends React.Component {
       CocktailContainer.getIngredient(this.state.ingredientsObject.get("type"));
     } else {
       document.querySelector(".addTile").classList.add("extend");
+      document.querySelector(".group").classList.remove("hidden");
+      document.querySelector(".slidecontainer").classList.remove("hidden");
     }
   }
 
   addIngredient(e) {
     if(document.querySelector(".addTile").classList.contains("extend")) {
       e.stopPropagation();
-      console.log("hello");
+      var name = document.getElementsByClassName("addInput")[0].value;
+      var amount = document.getElementsByClassName("amountInput")[0].value;
+      var isLiquid = document.getElementsByClassName("amountCheck")[0].checked;
+      var isAlcohol = document.getElementsByClassName("alcoholCheck")[0].checked;
+      var percent = document.getElementsByClassName("slider")[0].value;
+      console.log(name + " " + amount + " " + isLiquid + " " + isAlcohol + " " + percent);
+      
     }
+  }
+
+  changeSlider(e) {
+    document.getElementById("slideValue").innerText = e.target.value;
   }
 
   render() {
@@ -47,7 +59,18 @@ class IngredientTile extends React.Component {
         <div className="ingredientTile addTile" onClick={(event) => this.selectSelf(true)}>
           <svg onClick={(event) => this.addIngredient(event)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path className="heroicon-ui" d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"/></svg>
           <input className="addInput" placeholder="ingredient name" />
-          <div className="amount"><span> ml</span><input className="amountInput" placeholder="750" /></div>
+          <div className="group hidden">
+            <input className="amountInput" placeholder="750" />
+            <div className="amountText"> ml</div>
+            <div className="amountCheckText">is liquid?</div>
+            <input className="amountCheck" type="checkbox" name="isLiquid" value="isLiquid" />
+            <div className="amountCheckText alcoholText">is alcohol?</div>
+            <input className="amountCheck alcoholCheck" type="checkbox" name="isAlcohol" value="isAlcohol" />
+          </div>
+          <div className="slidecontainer hidden">
+            <div className="slideText">approximately <span id="slideValue">100</span>% left</div>
+            <input type="range" min="0" max="100" defaultValue="100" onChange={(event) => this.changeSlider(event)} className="slider" id="myRange" />
+          </div>
           <h3 className="title">add an ingredient</h3>
         </div>
       );

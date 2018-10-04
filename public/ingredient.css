@@ -242,6 +242,10 @@ body.fixed {
   }
 }
 
+.ingredientTile .hidden {
+  opacity: 0;
+}
+
 .ingredientTile .title {
   margin-top: 0px;
   margin-bottom: 20px;
@@ -270,6 +274,7 @@ body.fixed {
 .addTile .title {
   font-size: 1.5em;
   font-weight: normal;
+  display: none;
 }
 
 .addTile svg {
@@ -278,6 +283,7 @@ body.fixed {
   margin-left: -12px;
   margin-top: -5px;
   margin-bottom: -5px;
+  float: left;
 }
 
 .addTile .addInput,
@@ -292,16 +298,76 @@ body.fixed {
   padding: 2.5px 5px;
   margin-top: 4px;
   opacity: 0;
+  float: left;
   -webkit-transition: all 0.25s;
   transition: all 0.25s;
 }
 
-.addTile .amount .amountInput {
-  width: 50px;
+.addTile .group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  clear: both;
+  padding: 15px 0;
+  padding-bottom: 20px;
 }
 
-.addTile .amount span {
-  float: right;
+@media (max-width: 899px) {
+  .addTile .group {
+    padding-top: 2.5px;
+    padding-bottom: 7.5px;
+  }
+}
+
+.addTile .amountText {
+  margin-left: 5px;
+  margin-right: 20px;
+  margin-top: 9px;
+  margin-bottom: -5px;
+  font-size: 1.15em;
+}
+
+.addTile .amountCheckText {
+  margin-top: 9px;
+  font-size: 1.15em;
+}
+
+.addTile .alcoholText {
+  margin-left: 10px;
+}
+
+@media (max-width: 899px) {
+  .addTile .alcoholText,
+  .addTile .alcoholCheck {
+    display: none;
+  }
+}
+
+.addTile .amountCheck {
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+.addTile .amountInput {
+  width: 50px;
+  margin-bottom: 6px;
+  text-align: right;
+}
+
+.addTile .amountCheck {
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  outline-width: 0;
+  width: 20px;
+  height: 20px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
 }
 
 .addTile *:focus {
@@ -321,5 +387,44 @@ body.fixed {
 .ingredientTile.extend .addInput,
 .ingredientTile.extend .amountInput {
   opacity: 1;
+}
+
+.slidecontainer {
+  width: 100%;
+}
+
+.slideText {
+  margin-top: -9px;
+  font-size: 0.85em;
+  padding-left: 5px;
+  opacity: 0.75;
+  font-style: italic;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  outline: none;
+  -webkit-transition: .2s;
+  -webkit-transition: opacity .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 /*# sourceMappingURL=ingredient.css.map */

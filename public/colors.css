@@ -34,6 +34,18 @@
   color: #FFFFFF60;
 }
 
+.green-bg .slider::-webkit-slider-thumb {
+  background: #FFFFFF;
+}
+
+.green-bg .slider::-moz-range-thumb {
+  background: #FFFFFF;
+}
+
+.green-bg input:checked {
+  background: #FFFFFF;
+}
+
 .orange-bg {
   color: white;
   fill: white;
@@ -68,6 +80,18 @@
 
 .orange-bg input::placeholder {
   color: #FFFFFF60;
+}
+
+.orange-bg .slider::-webkit-slider-thumb {
+  background: #FFFFFF;
+}
+
+.orange-bg .slider::-moz-range-thumb {
+  background: #FFFFFF;
+}
+
+.orange-bg input:checked {
+  background: #FFFFFF;
 }
 
 .red-bg {
@@ -106,6 +130,18 @@
   color: #FFFFFF60;
 }
 
+.red-bg .slider::-webkit-slider-thumb {
+  background: #FFFFFF;
+}
+
+.red-bg .slider::-moz-range-thumb {
+  background: #FFFFFF;
+}
+
+.red-bg input:checked {
+  background: #FFFFFF;
+}
+
 .yellow-bg {
   color: black;
   fill: black;
@@ -140,6 +176,18 @@
 
 .yellow-bg input::placeholder {
   color: #00000060;
+}
+
+.yellow-bg .slider::-webkit-slider-thumb {
+  background: #000000;
+}
+
+.yellow-bg .slider::-moz-range-thumb {
+  background: #000000;
+}
+
+.yellow-bg input:checked {
+  background: black;
 }
 
 .pink-bg {
@@ -178,6 +226,18 @@
   color: #FFFFFF60;
 }
 
+.pink-bg .slider::-webkit-slider-thumb {
+  background: #FFFFFF;
+}
+
+.pink-bg .slider::-moz-range-thumb {
+  background: #FFFFFF;
+}
+
+.pink-bg input:checked {
+  background: #FFFFFF;
+}
+
 .blue-bg {
   color: white;
   fill: white;
@@ -212,6 +272,18 @@
 
 .blue-bg input::placeholder {
   color: #FFFFFF60;
+}
+
+.blue-bg .slider::-webkit-slider-thumb {
+  background: #FFFFFF;
+}
+
+.blue-bg .slider::-moz-range-thumb {
+  background: #FFFFFF;
+}
+
+.blue-bg input:checked {
+  background: #FFFFFF;
 }
 
 .purple-bg {
@@ -250,6 +322,18 @@
   color: #FFFFFF60;
 }
 
+.purple-bg .slider::-webkit-slider-thumb {
+  background: #FFFFFF;
+}
+
+.purple-bg .slider::-moz-range-thumb {
+  background: #FFFFFF;
+}
+
+.purple-bg input:checked {
+  background: #FFFFFF;
+}
+
 .black-bg {
   color: white;
   fill: white;
@@ -286,6 +370,18 @@
   color: #FFFFFF60;
 }
 
+.black-bg .slider::-webkit-slider-thumb {
+  background: #FFFFFF;
+}
+
+.black-bg .slider::-moz-range-thumb {
+  background: #FFFFFF;
+}
+
+.black-bg input:checked {
+  background: #FFFFFF;
+}
+
 .white-bg {
   color: black;
   fill: black;
@@ -319,5 +415,17 @@
 
 .white-bg input::placeholder {
   color: #00000060;
+}
+
+.white-bg .slider::-webkit-slider-thumb {
+  background: #000000;
+}
+
+.white-bg .slider::-moz-range-thumb {
+  background: #000000;
+}
+
+.white-bg input:checked {
+  background: black;
 }
 /*# sourceMappingURL=colors.css.map */
