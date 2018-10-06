@@ -266,7 +266,7 @@ var printCocktail = function(cocktail) {
 
 var recipe = "Add ingredients in a shaker filled with ice. Shake aggressively and pour over a glass of ice. Garnish with limes."
 
-prepareCocktail('Mai-Tai', recipe, [['raspberry', 300, 4, false, false], ['water', 400, 5, false, true]], 'yellow')
+/**prepareCocktail('Mai-Tai', recipe, [['raspberry', 300, 4, false, false], ['water', 400, 5, false, true]], 'yellow')
 .then(function(cocktail) {  
   printCocktail(cocktail)
   .then((string) => {
@@ -312,11 +312,11 @@ function makeAnother() {
       console.log(string);
     }, (error) => {
       console.log(error);
-    });**/
+    });
   }, function(error) {
     console.log(error);
   });
-}
+}**/
 
 
 /**var queryIngredient = new Parse.Query(Ingredient);

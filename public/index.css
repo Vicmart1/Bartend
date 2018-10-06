@@ -163,4 +163,50 @@ body.fixed {
 #overlay.show {
   opacity: 0.75;
 }
+
+#searchForm {
+  max-width: 1000px;
+  margin: auto;
+  position: relative;
+}
+
+#searchForm #searchBar {
+  width: calc(100% - 30px);
+  padding: 8px;
+  padding-left: 20px;
+  margin-top: 20px;
+  font-size: 1.25em;
+  border-radius: 10px;
+  border: 2px solid #00000040;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+#searchForm #searchBar::-webkit-input-placeholder {
+  font-weight: bold;
+}
+
+#searchForm #searchBar:-ms-input-placeholder {
+  font-weight: bold;
+}
+
+#searchForm #searchBar::-ms-input-placeholder {
+  font-weight: bold;
+}
+
+#searchForm #searchBar::placeholder {
+  font-weight: bold;
+}
+
+#searchForm #searchBar:focus, #searchForm #searchBar:active {
+  outline: none;
+  background-color: #00000008;
+}
+
+#searchForm #searchIcon {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  opacity: 0.25;
+}
 /*# sourceMappingURL=index.css.map */

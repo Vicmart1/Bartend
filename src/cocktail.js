@@ -160,6 +160,18 @@ class CocktailTile extends React.Component {
     });
   }
 
+  remove() {
+    this.setState({
+      hidden: true
+    });
+  }
+
+  show() {
+    this.setState({
+      hidden: false
+    });
+  }
+
   getHeight() {
     return (this.state.cocktailObject.get("ingredientsNum") * 42) + 180;
   }
@@ -250,6 +262,10 @@ class CocktailTile extends React.Component {
       classes += " to-top";
     }
 
+    if (this.state.hidden) {
+      classes += " hidden";
+    }
+
     return (
       <div className={classes} onClick={(event) => this.openModal(event)}>
         <h1 className='title'>{this.state.cocktailObject.get('name').toLowerCase()}</h1>
@@ -295,6 +311,14 @@ class CocktailContainer extends React.Component {
 
   updateCocktail(index) {
     return this.cocktailObjects[index].updateSelf();
+  }
+
+  removeCocktail(index) {
+    return this.cocktailObjects[index].remove();
+  }
+
+  showCocktail(index) {
+    return this.cocktailObjects[index].show();
   }
 
   componentDidMount() {
@@ -477,4 +501,19 @@ window.cleanArray = function(actual) {
 
 window.onlyUnique = function(value, index, self) { 
   return self.indexOf(value) === index;
+}
+
+document.getElementById("searchBar").addEventListener('input', searchChanged);
+
+function searchChanged() {
+  let searchVal = this.value;
+
+  var array = window.cocktailGroup.getCocktailObjects();
+  for(var i = 0; i < array.length; i++) {
+    if (!array[i].props.cocktail.get("name").includes(searchVal)) {
+      window.cocktailGroup.removeCocktail(i);
+    } else {
+      window.cocktailGroup.showCocktail(i);
+    }
+  }
 }
