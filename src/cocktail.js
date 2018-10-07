@@ -106,12 +106,15 @@ class CocktailTile extends React.Component {
     }, 250);
   }
 
-  addIngredient() {
+  addIngredient(e) {
+    e.stopPropagation();
     window.openIngredientModal(this.state.cocktailObject.get('color'), this.state.ingredients);
   }
 
-  subIngredient(event) {
-    var element = event.target.parentElement;
+  subIngredient(e) {
+    e.stopPropagation();
+
+    var element = e.target.parentElement;
 
     if (!element.classList.contains("ingredient")) {
       element = element.parentElement;
@@ -145,7 +148,7 @@ class CocktailTile extends React.Component {
     // eslint-disable-next-line
     var name = this.state.cocktailObject.get("name");
     var ingredients = ingredientResults;
-    var recipe = document.getElementById("modalCocktail").children[0].children[2].value;
+    var recipe = document.getElementById("modalCocktail").children[0].children[3].value;
     var color = this.state.color ? this.state.color : (this.state.cocktailObject.get("color") ? this.state.cocktailObject.get("color") : "white");
 
     prepareCocktail(name, recipe, ingredients, color)
