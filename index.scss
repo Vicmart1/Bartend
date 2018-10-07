@@ -201,9 +201,15 @@ body.fixedMobile
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #000000;
+  background-color: #000000B0;
   opacity: 0;
   z-index: -1;
+  -webkit-backdrop-filter: blur(15px);
+
+  @include mobile
+  {
+    -webkit-backdrop-filter: blur(5px);
+  }
 }
 
 #overlay.active
@@ -213,7 +219,24 @@ body.fixedMobile
 
 #overlay.show
 {
-  opacity: 0.75;
+  opacity: 1;
+}
+
+#searchFixed
+{
+  position: fixed;
+  width: 100vw;
+  z-index: 8;
+  top: -80px;
+  padding-bottom: 15px;
+  background-color: #FFFFFFA0;
+  -webkit-backdrop-filter: blur(15px);
+  @include transition(all 0.5s);
+}
+
+#searchFixed.show
+{
+  top: 0;
 }
 
 #searchForm
@@ -230,7 +253,9 @@ body.fixedMobile
     margin-top: 20px;
     font-size: 1.25em;
     border-radius: 10px;
-    border: 2px solid #00000040;
+    border-width: 0;
+    background-color: #00000010;
+    -webkit-backdrop-filter: blur(45px);
     @include transition(all 0.5s);
 
     &::placeholder
@@ -242,15 +267,28 @@ body.fixedMobile
     &:active
     {
       outline: none;
-      background-color: #00000008;
+      background-color: #00000018;
+    }
+
+    @include mobile
+    {
+      margin-left: 15px;
+      margin-top: 15px;
+      width: calc(100% - 58px);
     }
   }
 
   #searchIcon
   {
     position: absolute;
-    top: 30px;
+    top: 28px;
     right: 20px;
     opacity: 0.25;
+
+    @include mobile
+    {
+      top: 24px;
+      right: 35px;
+    }
   }
 }
