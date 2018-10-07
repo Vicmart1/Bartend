@@ -46,6 +46,14 @@
   background: #FFFFFF;
 }
 
+.green-bg .swatch {
+  border-color: #FFFFFF80;
+}
+
+.green-bg .swatch:hover, .green-bg .swatch.active {
+  border-color: #FFFFFF;
+}
+
 .orange-bg {
   color: white;
   fill: white;
@@ -92,6 +100,14 @@
 
 .orange-bg input:checked {
   background: #FFFFFF;
+}
+
+.orange-bg .swatch {
+  border-color: #FFFFFF80;
+}
+
+.orange-bg .swatch:hover, .orange-bg .swatch.active {
+  border-color: #FFFFFF;
 }
 
 .red-bg {
@@ -142,6 +158,14 @@
   background: #FFFFFF;
 }
 
+.red-bg .swatch {
+  border-color: #FFFFFF80;
+}
+
+.red-bg .swatch:hover, .red-bg .swatch.active {
+  border-color: #FFFFFF;
+}
+
 .yellow-bg {
   color: black;
   fill: black;
@@ -187,7 +211,15 @@
 }
 
 .yellow-bg input:checked {
-  background: black;
+  background: #000000;
+}
+
+.yellow-bg .swatch {
+  border-color: #00000080;
+}
+
+.yellow-bg .swatch:hover, .yellow-bg .swatch.active {
+  border-color: #000000;
 }
 
 .pink-bg {
@@ -238,6 +270,14 @@
   background: #FFFFFF;
 }
 
+.pink-bg .swatch {
+  border-color: #FFFFFF80;
+}
+
+.pink-bg .swatch:hover, .pink-bg .swatch.active {
+  border-color: #FFFFFF;
+}
+
 .blue-bg {
   color: white;
   fill: white;
@@ -284,6 +324,14 @@
 
 .blue-bg input:checked {
   background: #FFFFFF;
+}
+
+.blue-bg .swatch {
+  border-color: #FFFFFF80;
+}
+
+.blue-bg .swatch:hover, .blue-bg .swatch.active {
+  border-color: #FFFFFF;
 }
 
 .purple-bg {
@@ -334,6 +382,14 @@
   background: #FFFFFF;
 }
 
+.purple-bg .swatch {
+  border-color: #FFFFFF80;
+}
+
+.purple-bg .swatch:hover, .purple-bg .swatch.active {
+  border-color: #FFFFFF;
+}
+
 .black-bg {
   color: white;
   fill: white;
@@ -382,6 +438,14 @@
   background: #FFFFFF;
 }
 
+.black-bg .swatch {
+  border-color: #FFFFFF80;
+}
+
+.black-bg .swatch:hover, .black-bg .swatch.active {
+  border-color: #FFFFFF;
+}
+
 .white-bg {
   color: black;
   fill: black;
@@ -426,6 +490,14 @@
 }
 
 .white-bg input:checked {
-  background: black;
+  background: #000000;
+}
+
+.white-bg .swatch {
+  border-color: #00000080;
+}
+
+.white-bg .swatch:hover, .white-bg .swatch.active {
+  border-color: #000000;
 }
 /*# sourceMappingURL=colors.css.map */

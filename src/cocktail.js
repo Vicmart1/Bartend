@@ -18,6 +18,8 @@ Parse.serverURL = "https://bartend.herokuapp.com/parse";
 const Cocktail = Parse.Object.extend("CocktailTest");
 const Ingredient = Parse.Object.extend("IngredientTest");
 
+window.availableColors = ['green', 'orange', 'red', 'yellow', 'pink', 'blue', 'purple', 'black', 'white'];
+
 class CocktailTile extends React.Component {
   constructor(props) {
     super(props);
@@ -46,19 +48,25 @@ class CocktailTile extends React.Component {
   }
 
   openModal(e) {
-    ReactDOM.render(<CocktailTile ref={(component) => {window.activeCocktail = component}} key={this.state.cocktailObject.id} cocktail={this.state.cocktailObject}/>, document.querySelector('#modalCocktail'));
-    document.getElementById("modalCocktail").classList.add("active");
-    document.getElementById("overlay").classList.add("active");
-    document.getElementById("overlay").classList.add("show");
-    document.body.classList.add("fixed");
-    document.getElementById("searchFixed").classList.remove("show");
-    document.getElementById("rootCocktails").children[0].classList.add("background");
-    disableScroll();
+    if (!this.state.editMode) {
+      ReactDOM.render(<CocktailTile ref={(component) => {window.activeCocktail = component}} key={this.state.cocktailObject.id} cocktail={this.state.cocktailObject}/>, document.querySelector('#modalCocktail'));
+      document.getElementById("modalCocktail").classList.add("active");
+      document.getElementById("overlay").classList.add("active");
+      document.getElementById("overlay").classList.add("show");
+      document.body.classList.add("fixed");
+      document.getElementById("searchFixed").classList.remove("show");
+      document.getElementById("rootCocktails").children[0].classList.add("background");
+      disableScroll();
+    }
   }
 
   closeModal(e) {
     e.stopPropagation();
+    ReactDOM.unmountComponentAtNode(document.querySelector('#modalCocktail'));
     removeOverlay();
+    this.setState({
+      editMode: false
+    });
   }
 
   editModal(e) {
@@ -68,6 +76,8 @@ class CocktailTile extends React.Component {
       this.setState({
         editMode: true
       });
+
+      enableScroll();
 
       if (lastMobileScroll === -1) {
         lastMobileScroll = window.scrollY || window.scrollTop || document.getElementsByTagName("html")[0].scrollTop;
@@ -121,7 +131,7 @@ class CocktailTile extends React.Component {
     document.getElementById("updateAlert").classList.add("show");
 
     var ingredientResults = [];
-    var ingredientsDOM = document.getElementById("modalCocktail").children[0].children[1].children;
+    var ingredientsDOM = document.getElementById("modalCocktail").children[0].children[2].children;
     var ingredientsLength = ingredientsDOM.length;
     for (var i = 0; i < ingredientsLength - 1; i++) {
       var amount = parseFloat(ingredientsDOM[i].children[1].children[0].children[0].value);
@@ -136,7 +146,7 @@ class CocktailTile extends React.Component {
     var name = this.state.cocktailObject.get("name");
     var ingredients = ingredientResults;
     var recipe = document.getElementById("modalCocktail").children[0].children[2].value;
-    var color = this.state.cocktailObject.get("color") ? this.state.cocktailObject.get("color") : "white";
+    var color = this.state.color ? this.state.color : (this.state.cocktailObject.get("color") ? this.state.cocktailObject.get("color") : "white");
 
     prepareCocktail(name, recipe, ingredients, color)
     .then(function(cocktail) {  
@@ -177,6 +187,18 @@ class CocktailTile extends React.Component {
     return (this.state.cocktailObject.get("ingredientsNum") * 42) + 180;
   }
 
+  switchColor(e) {
+    e.stopPropagation();
+    try {
+      var colorSelected = e.target.classList[1].split("-bg")[0];
+
+      this.setState({
+        color: colorSelected
+      });
+    } catch (TypeError) {
+    }
+  }
+
   render() {
     var floorAmount = -1;
     var ingredientsDOM = [];
@@ -192,7 +214,8 @@ class CocktailTile extends React.Component {
       if (this.state.editMode) {
         ingredientsDOM.push(
           <li key={ingredient.get('type')} className="ingredient">
-              <svg onClick={(event) => this.subIngredient(event)} className="trashIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path className="heroicon-ui" d="M8 6V4c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-1v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8H3a1 1 0 1 1 0-2h5zM6 8v12h12V8H6zm8-2V4h-4v2h4zm-4 4a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1z"/></svg>            <div className="mainText">
+            <svg onClick={(event) => this.subIngredient(event)} className="trashIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path className="heroicon-ui" d="M8 6V4c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-1v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8H3a1 1 0 1 1 0-2h5zM6 8v12h12V8H6zm8-2V4h-4v2h4zm-4 4a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1z"/></svg>            
+            <div className="mainText">
               <span>
                 <input className="mainInput" defaultValue={this.state.cocktailObject.get('ID_' + ingredient.id) ? this.state.cocktailObject.get('ID_' + ingredient.id) : 0} />
               </span> oz of {ingredient.get('type')}
@@ -229,9 +252,9 @@ class CocktailTile extends React.Component {
     }
 
     var classes = "cocktail";
-    var color = this.state.cocktailObject.get('color');
-    if (color && color !== "") {
-      classes += " " + color + "-bg";
+    var cocktailColor = this.state.color ? this.state.color : this.state.cocktailObject.get('color');
+    if (cocktailColor && cocktailColor !== "") {
+      classes += " " + cocktailColor + "-bg";
     } else {
       classes += " white-bg";
     }
@@ -256,7 +279,6 @@ class CocktailTile extends React.Component {
     var editIcon = <svg className="editIcon" onClick={(event) => this.editModal(event)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path className="heroicon-ui" d="M6.3 12.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h6a1 1 0 0 1 0 2H4v14h14v-6z"/></svg>;
 
     if (this.state.editMode) {
-      enableScroll();
       recipeDOM = <textarea defaultValue={this.state.cocktailObject.get('recipe')}></textarea>;
       canmakeDOM = "";
       editIcon = <svg className="editIcon" onClick={(event) => this.finishEdit(event)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path className="heroicon-ui" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z"/></svg>;
@@ -266,10 +288,27 @@ class CocktailTile extends React.Component {
     if (this.state.hidden) {
       classes += " hidden";
     }
+    
+    var colorPicker = [];
+    if (this.state.editMode) {
+      window.availableColors.forEach(function(color) {
+        let className = "swatch " + color +"-bg";
+        if (cocktailColor == color) {
+          className += " active";
+        }
+
+        colorPicker.push(
+          <div key={color} className={className}></div>
+        );
+      });
+    }
 
     return (
       <div className={classes} onClick={(event) => this.openModal(event)}>
         <h1 className='title'>{this.state.cocktailObject.get('name').toLowerCase()}</h1>
+        <div className='colorPicker' onClick={(event) => this.switchColor(event)}>
+          {colorPicker} 
+        </div>
         <ul className={ingredientsClasses}>
           {ingredientsDOM} 
         </ul>
@@ -535,7 +574,7 @@ window.addEventListener('scroll', function(e) {
   } else {
     window.scrollCounter--;
 
-    if (window.scrollCounter < 0) {
+    if (window.scrollCounter < 0 && window.mobilecheck()) {
       document.getElementById("searchFixed").classList.remove("show");
     }
   }

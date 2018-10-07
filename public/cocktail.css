@@ -177,7 +177,7 @@ body.fixed {
   z-index: 8;
   top: -80px;
   padding-bottom: 15px;
-  background-color: #FFFFFFA0;
+  background-color: #FFFFFFC0;
   -webkit-backdrop-filter: blur(15px);
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
@@ -350,6 +350,7 @@ body.fixed {
 
 .cocktail .ingredients .ingredient .trashIcon {
   position: relative;
+  margin-right: 10px;
   top: 5px;
   cursor: pointer;
 }
@@ -397,6 +398,7 @@ body.fixed {
   .cocktail textarea {
     height: 200px;
     font-size: 1.25em;
+    width: calc(100% - 85px);
   }
 }
 
@@ -421,6 +423,57 @@ body.fixed {
   right: 20px;
   display: none;
   cursor: pointer;
+}
+
+.colorPicker {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: 15px -5px;
+}
+
+@media (max-width: 899px) {
+  .colorPicker {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    position: absolute;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    right: 27.5px;
+    top: 110px;
+  }
+}
+
+.swatch {
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  border-width: 3px;
+  border-style: solid;
+  margin: 0px 5px;
+  cursor: pointer;
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+  opacity: 0.5;
+}
+
+.swatch:hover {
+  opacity: 0.75;
+}
+
+.swatch.active {
+  opacity: 1;
+}
+
+@media (max-width: 899px) {
+  .swatch {
+    margin: 5px 0px;
+  }
 }
 
 .hidden {
