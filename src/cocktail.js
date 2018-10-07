@@ -51,6 +51,7 @@ class CocktailTile extends React.Component {
     document.getElementById("overlay").classList.add("active");
     document.getElementById("overlay").classList.add("show");
     document.body.classList.add("fixed");
+    document.getElementById("searchFixed").classList.remove("show");
     document.getElementById("rootCocktails").children[0].classList.add("background");
     disableScroll();
   }
@@ -415,6 +416,7 @@ function removeOverlay() {
   document.body.classList.remove("fixedMobile");
   document.getElementById("overlay").classList.remove("show");
   document.getElementById("rootCocktails").children[0].classList.remove("background");
+  document.getElementById("searchFixed").classList.add("show");
   enableScroll();
   
   if (window.mobilecheck()) {
@@ -506,14 +508,37 @@ window.onlyUnique = function(value, index, self) {
 document.getElementById("searchBar").addEventListener('input', searchChanged);
 
 function searchChanged() {
-  let searchVal = this.value;
+  let searchVal = this.value.toLowerCase();
 
+  var results = 0;
   var array = window.cocktailGroup.getCocktailObjects();
   for(var i = 0; i < array.length; i++) {
-    if (!array[i].props.cocktail.get("name").includes(searchVal)) {
+    if (!array[i].props.cocktail.get("name").toLowerCase().includes(searchVal)) {
       window.cocktailGroup.removeCocktail(i);
     } else {
       window.cocktailGroup.showCocktail(i);
+      results++;
     }
   }
+
+  window.results = results;
 }
+
+window.scrollCounter = 20;
+window.results = 1;
+document.getElementById("searchFixed").classList.add("show");
+
+window.addEventListener('scroll', function(e) {
+  if (window.scrollY < window.lastScroll || window.results == 0) {
+    document.getElementById("searchFixed").classList.add("show");
+    window.scrollCounter = 20;
+  } else {
+    window.scrollCounter--;
+
+    if (window.scrollCounter < 0) {
+      document.getElementById("searchFixed").classList.remove("show");
+    }
+  }
+
+  window.lastScroll = window.scrollY;
+});

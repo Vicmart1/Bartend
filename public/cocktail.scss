@@ -4,6 +4,7 @@
 {
   max-width: 1000px;
   margin: auto;
+  margin-top: 75px;
   @include perspective(1000);
   @include perspective-origin(center);
 }
