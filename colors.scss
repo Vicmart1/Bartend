@@ -30,6 +30,22 @@
   {
     background: #FFFFFF;
   }
+
+  .swatch
+  {
+    border-color: #FFFFFF80;
+
+    &:hover,
+    &.active
+    {
+      border-color: #FFFFFF;
+    }
+
+    @include mobile
+    {
+      border-color: #FFFFFF;
+    }
+  }
 }
 
 @mixin black-base {
@@ -62,8 +78,38 @@
 
   input:checked
   {
-    background: black;
+    background: #000000;
   }
+
+  .swatch
+  {
+    border-color: #00000080;
+
+    &:hover,
+    &.active
+    {
+      border-color: #000000;
+    }
+
+    @include mobile
+    {
+      border-color: #000000;
+    }
+  }
+}
+
+@mixin background($color1, $color2, $usewhitebase)
+{
+  @if $usewhitebase == true {
+    @include white-base();
+  } @else {
+    @include black-base();
+  }
+  border-color: $color1;
+  background: $color1; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, $color1, $color2); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, $color1, $color2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .green-bg

@@ -177,7 +177,7 @@ body.fixed {
   z-index: 8;
   top: -80px;
   padding-bottom: 15px;
-  background-color: #FFFFFFA0;
+  background-color: #FFFFFFC0;
   -webkit-backdrop-filter: blur(15px);
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
